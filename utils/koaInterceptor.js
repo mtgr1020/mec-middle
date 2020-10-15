@@ -33,7 +33,6 @@ const defaultResponseIntercept = async (ctx, next) => {
     status: SUCCESS_STATUS,
     message: SUCCESS_MESSAGE,
   };
-  console.log("-defaultResponseIntercept-");
   try {
     await next();
   } catch (err) {
