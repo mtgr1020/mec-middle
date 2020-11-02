@@ -13,5 +13,8 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.4.0",
     "koa-session": "^6.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1"
   }
 }

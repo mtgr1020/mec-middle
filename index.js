@@ -3,7 +3,7 @@ const app = new koa();
 const {
   corsIntercept,
   defaultResponseIntercept,
-  sessionIntercept
+  sessionIntercept,
 } = require("./utils/koaInterceptor");
 const router = require("./router");
 const bodyParse = require("koa-bodyparser");
