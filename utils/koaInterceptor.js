@@ -3,7 +3,10 @@ const {
   SUCCESS_MESSAGE,
   ERROR_STATUS,
   ERROR_MESSAGE,
+  SESSION_CONFIG,
 } = require("../config");
+
+const session = require('koa-session')
 
 /**
  * koa 跨域拦截器 请求跨域处理
@@ -28,6 +31,20 @@ const corsIntercept = async (ctx, next) => {
   }
 };
 
+/**
+ * session处理
+ * @param { Object } instance koa实例
+ */
+const sessionIntercept = (instance) => {
+  SESSION_CONFIG.signed && (instance.keys = ['KeysForSigned']); // 如果SESSION_CONFIG中signed为false就不需要keys
+  return session(SESSION_CONFIG,instance)
+}
+
+/**
+ * 服务请求默认拦截器
+ * @param {*} ctx 
+ * @param {*} next 
+ */
 const defaultResponseIntercept = async (ctx, next) => {
   ctx.body = {
     status: SUCCESS_STATUS,
@@ -46,4 +63,5 @@ const defaultResponseIntercept = async (ctx, next) => {
 module.exports = {
   corsIntercept,
   defaultResponseIntercept,
+  sessionIntercept
 };

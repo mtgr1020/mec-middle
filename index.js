@@ -3,6 +3,7 @@ const app = new koa();
 const {
   corsIntercept,
   defaultResponseIntercept,
+  sessionIntercept
 } = require("./utils/koaInterceptor");
 const router = require("./router");
 const bodyParse = require("koa-bodyparser");
@@ -15,6 +16,7 @@ app
       multipart: true,
     })
   )
+  .use(sessionIntercept(app))
   .use(defaultResponseIntercept)
   .use(router);
 /**
