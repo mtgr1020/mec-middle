@@ -2,6 +2,7 @@ const router = require("koa-router")({
   prefix: "/api/v1"
 });
 
+const { asideMenuConfig } = require("../config")
 
 
 router.post("/userLogin", (ctx) => {
@@ -17,7 +18,7 @@ router.post("/userLogin", (ctx) => {
 
 router.get("/getAsideMenus", (ctx) => {
   ctx.body = {
-    memu: 'di'
+    asideMenuList: asideMenuConfig
   }
 })
 
