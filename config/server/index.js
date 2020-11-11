@@ -19,7 +19,7 @@ const SESSION_CONFIG = {
 /**
  * server启动端口
  */
-const PORT = 5000
+const PORT = 9000
 
 module.exports = {
   PORT,

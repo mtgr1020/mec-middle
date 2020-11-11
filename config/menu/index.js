@@ -23,46 +23,20 @@ const headerMenuConfig = [
 
 const asideMenuConfig = [
     {
-        name: 'Dashboard',
-        path: '/dashboard',
-        icon: 'home2',
+        name: 'workspace',
+        path: '/workspace',
+        icon: 'AlertOutlined',
         children: [
             {
                 name: 'monitor',
-                path: '/dashboard/monitor',
-            },
-        ],
-    },
-    {
-        name: '视频管理',
-        path: '/course',
-        icon: 'picture',
-        children: [
-            {
-                name: 'upload',
-                path: '/course/upload',
-            },
-            {
-                name: 'maintain',
-                path: '/course/maintain',
-            },
-        ],
-    },
-    {
-        name: '讲师管理',
-        path: '/lecturer',
-        icon: 'yonghu',
-        children: [
-            {
-                name: 'maintenance',
-                path: '/lecturer/maintenance',
+                path: '/workspace/monitor',
             },
         ],
     },
     {
         name: '菜单管理',
         path: '/menu',
-        icon: 'cascades',
+        icon: 'AppstoreOutlined',
         children: [
             {
                 name: 'maintenance',
@@ -73,7 +47,7 @@ const asideMenuConfig = [
     {
         name: 'chart',
         path: '/chart',
-        icon: 'chart',
+        icon: 'BarChartOutlined',
         authorities: ['zhang'],
         children: [
             {
@@ -89,7 +63,7 @@ const asideMenuConfig = [
     {
         name: '表格页',
         path: '/table',
-        icon: 'cascades',
+        icon: 'TableOutlined',
         authorities: ['zhang'],
         children: [
             {
@@ -106,8 +80,8 @@ const asideMenuConfig = [
     {
         name: '列表页',
         path: '/list',
-        icon: 'menu',
-        authorities: ['zhang'],
+        icon: 'SisternodeOutlined',
+        authorities: ['admin', 'zhang'],
         children: [
             {
                 name: 'basic',
@@ -122,8 +96,8 @@ const asideMenuConfig = [
     {
         name: 'profile',
         path: '/profile',
-        icon: 'content',
-        authorities: ['zhang'],
+        icon: 'ToolOutlined',
+        authorities: ['admin'],
         children: [
             {
                 name: 'basic',
@@ -136,37 +110,9 @@ const asideMenuConfig = [
         ],
     },
     {
-        name: 'result',
-        path: '/result',
-        icon: 'question',
-        authorities: ['zhang'],
-        children: [
-            {
-                name: 'success',
-                path: '/result/success',
-            },
-            {
-                name: 'fail',
-                path: '/result/fail',
-            },
-        ],
-    },
-    {
-        name: 'account',
-        path: '/account',
-        icon: 'yonghu',
-        authorities: ['zhang'],
-        children: [
-            {
-                name: 'setting',
-                path: '/account/setting',
-            },
-        ],
-    },
-    {
         name: 'exception',
         path: '/exception',
-        icon: 'notice',
+        icon: 'AreaChartOutlined',
         authorities: ['zhang'],
         children: [
             {
