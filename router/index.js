@@ -1,25 +1,20 @@
-const router = require("koa-router")({
-  prefix: "/api/v1"
-});
+const glob = require('glob')
+const { resolve } = require('path')
+const compose = require('koa-compose')
+const { log } = require('../log')
 
-const { asideMenuConfig } = require("../config")
+
+const registerRouter = () => {
+  const routers = []
+  log(`开始加载目录${__dirname}下路由`)
+  glob.sync(resolve(__dirname, "./", '**?/index.js'))
+    .map(router => {
+      routers.push(require(router).routes())
+      routers.push(require(router).allowedMethods())
+    })
+  return compose(routers)
+}
 
 
-router.post("/userLogin", (ctx) => {
-  const { userName, pass } = ctx.request.body;
-  //TODO check userInfo from db 
-  if (userName !== pass) {
-    throw new Error('用户名密码不正确')
-  }
-  ctx.session.username = userName
-  // 当我们没有响应数据的时候,就给个空对象
-  ctx.body = {}
-});
 
-router.get("/getAsideMenus", (ctx) => {
-  ctx.body = {
-    asideMenuList: asideMenuConfig
-  }
-})
-
-module.exports = router.routes();
+module.exports = registerRouter;

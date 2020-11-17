@@ -4,7 +4,11 @@ const {
   ERROR_STATUS,
   ERROR_MESSAGE,
   SESSION_CONFIG,
+  NOT_LOGIN,
+  REQUEST_WHITE_LIST,
 } = require("../config");
+
+const { error } = require('../log')
 
 const session = require('koa-session')
 
@@ -46,6 +50,26 @@ const sessionIntercept = (instance) => {
  * @param {*} ctx 
  * @param {*} next 
  */
+const defaultRequestIntercept = async (ctx, next) => {
+
+  const noIntercept = REQUEST_WHITE_LIST[ctx.request.path]
+  const username = ctx.session && ctx.session.username;
+  if (noIntercept || username) {
+    await next();
+  } else {
+    ctx.body = {
+      status: NOT_LOGIN,
+      message: NOT_LOGIN
+    }
+  }
+
+};
+
+/**
+ * 服务响应默认拦截器
+ * @param {*} ctx 
+ * @param {*} next 
+ */
 const defaultResponseIntercept = async (ctx, next) => {
 
   try {
@@ -56,9 +80,15 @@ const defaultResponseIntercept = async (ctx, next) => {
         message: SUCCESS_MESSAGE,
       }, ctx.body);
     } else {
-      console.error(JSON.stringify(ctx.response, null, 2))
+      const { status, message } = ctx.response;
+      error({
+        requestUrl: ctx.request.url,
+        status,
+        message
+      })
     }
   } catch (err) {
+    error(err)
     ctx.body = {
       status: ERROR_STATUS,
       message: err.message || ERROR_MESSAGE,
@@ -67,6 +97,7 @@ const defaultResponseIntercept = async (ctx, next) => {
 };
 
 module.exports = {
+  defaultRequestIntercept,
   corsIntercept,
   defaultResponseIntercept,
   sessionIntercept

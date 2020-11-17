@@ -21,7 +21,16 @@ const SESSION_CONFIG = {
  */
 const PORT = 9000
 
+/**
+ * 
+ */
+const REQUEST_WHITE_LIST = {
+  "/api/v1/checkAuthentication": true,
+  "/api/v1/userLogin": true
+}
+
 module.exports = {
   PORT,
-  SESSION_CONFIG
+  SESSION_CONFIG,
+  REQUEST_WHITE_LIST
 };
